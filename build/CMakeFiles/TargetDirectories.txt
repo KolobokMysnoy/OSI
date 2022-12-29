@@ -1,0 +1,3 @@
+/home/gevok/OSI/build/CMakeFiles/sjf.dir
+/home/gevok/OSI/build/CMakeFiles/edit_cache.dir
+/home/gevok/OSI/build/CMakeFiles/rebuild_cache.dir

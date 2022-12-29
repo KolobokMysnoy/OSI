@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/sjf.dir/sjf.cpp.o CMakeFiles/sjf.dir/process.cpp.o CMakeFiles/sjf.dir/main.cpp.o -o sjf 
