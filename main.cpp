@@ -1,10 +1,10 @@
 #include <iostream>
 
-#include "fifo.hpp"
+#include "sjf.hpp"
 
 int main() {
 
-    FifoSeq fifoSystem;
+    SjfSeq sjfSystem;
 
     std::string command;
 
@@ -21,18 +21,18 @@ int main() {
             std::cin >> processName;
             std::cin >> processTime;
             
-            fifoSystem.addNewProcess(processName, std::stoul(processTime));
+            sjfSystem.addNewProcess(processName, std::stoul(processTime));
 
             break;
         
         case 'v':
             std::cout << "View first process name" << std::endl;
-            std::cout << fifoSystem.getFirstProcessName() << std::endl;
+            std::cout << sjfSystem.getFirstProcessName() << std::endl;
 
             break;
 
         case 'g':
-            std::cout << "Remove element: " << std::endl << fifoSystem.getFirstProcessAndRemoveIt() << std::endl;
+            std::cout << "Remove element: " << std::endl << sjfSystem.getFirstProcessAndRemoveIt() << std::endl;
 
             break;
         

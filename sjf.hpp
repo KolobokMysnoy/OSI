@@ -2,10 +2,11 @@
 
 #include <string>
 #include <queue>
+#include <vector>
 
 #include "process.hpp"
 
-class IFifoSeq {
+class ISjfSeq {
     public:
     virtual std::string getFirstProcessName() = 0;
     virtual IProcess* getFirstProcess() = 0;
@@ -14,9 +15,15 @@ class IFifoSeq {
     virtual void addNewProcess(std::string nameOfProcess, size_t timeOFProcess) = 0;
 };
 
-class FifoSeq : public IFifoSeq {
+struct cmp {
+    bool operator() (IProcess* l, IProcess* r) { 
+        return l->getTimeOfProcess() > r->getTimeOfProcess(); 
+    }
+};
+
+class SjfSeq : public ISjfSeq {
     public:
-    FifoSeq();
+    SjfSeq();
 
     std::string getFirstProcessName() override;
     IProcess* getFirstProcess() override;
@@ -24,10 +31,9 @@ class FifoSeq : public IFifoSeq {
 
     void addNewProcess(std::string nameOfProcess, size_t timeOFProcess) override;
 
-    ~FifoSeq();
+    ~SjfSeq();
 
     private:
     size_t _processQuant;
-    std::queue<IProcess*> _processes;
+    std::priority_queue<IProcess*, std::vector<IProcess*>, cmp> _processes;
 };
-

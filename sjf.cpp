@@ -1,37 +1,37 @@
 #include <iostream>
 
-#include "fifo.hpp"
+#include "sjf.hpp"
 
-FifoSeq::FifoSeq() {
+SjfSeq::SjfSeq() {
     _processQuant = 0;
 }
 
-std::string FifoSeq::getFirstProcessName() {
+std::string SjfSeq::getFirstProcessName() {
     if (_processQuant == 0) {
         return "";
     }
 
-    return _processes.front()->getNameOfProcess();
+    return _processes.top()->getNameOfProcess();
 }
 
-IProcess* FifoSeq::getFirstProcess() {
+IProcess* SjfSeq::getFirstProcess() {
     if (_processQuant == 0) {
         return nullptr;
     }
 
     _processQuant--;
-    IProcess* result = _processes.front();
+    IProcess* result = _processes.top();
     _processes.pop();
 
     return result;
 }
 
-void FifoSeq::addNewProcess(std::string nameOfProcess, size_t timeOFProcess) {
+void SjfSeq::addNewProcess(std::string nameOfProcess, size_t timeOFProcess) {
     _processes.push(new Process(nameOfProcess, timeOFProcess));
     _processQuant++;
 }
 
-std::string FifoSeq::getFirstProcessAndRemoveIt() {
+std::string SjfSeq::getFirstProcessAndRemoveIt() {
     if (_processQuant == 0) {
         return "";
     }
@@ -39,10 +39,10 @@ std::string FifoSeq::getFirstProcessAndRemoveIt() {
     return returnName;
 }
 
-FifoSeq::~FifoSeq() {
+SjfSeq::~SjfSeq() {
     if (_processQuant != 0) {
-        while (_processes.front()) {
-            IProcess* deleteProcess = _processes.front();
+        while (_processes.top()) {
+            IProcess* deleteProcess = _processes.top();
             _processes.pop();
 
             delete deleteProcess;
